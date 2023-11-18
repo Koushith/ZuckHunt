@@ -21,7 +21,7 @@ h1{
 
 .btn{
  
-  font-family: 'Londrina Solid', 'sans-serif';
+font-family: 'Londrina Solid', 'sans-serif';  
       display: block;
     padding: 0.5rem 1rem;
     background-color: #0d6efd;

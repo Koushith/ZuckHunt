@@ -7,7 +7,7 @@ import {
   CardContent,
 } from "@/components/ui/card"
 import { ChromeIcon } from "lucide-react"
-import { TopBar } from "../../components/common/navbar.component"
+import { TopBar } from "../../components/common/topbar.component"
 import { ConnectWallet } from "@thirdweb-dev/react"
 
 export const AuthScreen = () => {

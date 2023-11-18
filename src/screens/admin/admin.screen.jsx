@@ -21,7 +21,7 @@ import {
 } from "@waku/sdk"
 import "https://unpkg.com/@turf/turf@6/turf.min.js"
 import { backendUrl } from "../../constants"
-import { TopBar } from "../../components/common/navbar.component"
+import { TopBar } from "../../components/common/topbar.component"
 import styled from "styled-components"
 import { GoogleMap, useJsApiLoader, Rectangle } from "@react-google-maps/api"
 

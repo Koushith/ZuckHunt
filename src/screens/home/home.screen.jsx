@@ -10,6 +10,15 @@ import {
   waitForRemotePeer,
   Protocols,
 } from "@waku/sdk"
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { ProtoQuestData } from "../admin/admin.screen.new"
 const ContentTopic = `/zuckhunt/debug6`
 const Encoder = createEncoder({ contentTopic: ContentTopic })
@@ -26,6 +35,7 @@ import {
 } from "@chakra-ui/react"
 import { QuestCard } from "../../components/card/card.component"
 import { BoxIcon, MSquare } from "lucide-react"
+import { HamburgerMenuIcon, IconJarLogoIcon } from "@radix-ui/react-icons"
 
 export const HomeScreen = () => {
   const [waku, setWaku] = useState(undefined)
@@ -264,9 +274,24 @@ export const HomeScreen = () => {
     <HomeContainer>
       <div className='header'>
         <h1>Zuck Hunt</h1>
-        <Button className='btn' onClick={handleOpenModal}>
-          Show Quests
-        </Button>
+        <div className='flex gap-4 p-'>
+          {/* <DropdownMenu>
+            <DropdownMenuTrigger asChild className='ml-2'>
+              <Button variant='outline' size='icon'>
+                <HamburgerMenuIcon className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
+                <IconJarLogoIcon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
+                <span className='sr-only'>Toggle theme</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end'>
+              <DropdownMenuItem onClick={() => ""}>Dark</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => ""}>Light</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu> */}
+          <Button className='btn' onClick={handleOpenModal}>
+            Show Quests
+          </Button>
+        </div>
       </div>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>

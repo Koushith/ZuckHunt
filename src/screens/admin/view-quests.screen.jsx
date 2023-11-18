@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { TopBar } from "../../components/common/navbar.component"
+import { TopBar } from "../../components/common/topbar.component"
 import Nouns from "../../assets/game-assets/nouns.svg"
 import { ViewQuestContainer } from "./view-quest.styles"
 

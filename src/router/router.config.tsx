@@ -1,5 +1,5 @@
 import App from "@/App"
-import { AdminScreen, HomeScreen } from "@/screens"
+import { AdminScreen, HomeScreen, ProfileScreen } from "@/screens"
 import { ViewQuestsScreen } from "@/screens/admin/view-quests.screen"
 import { AuthScreen } from "@/screens/auth/auth.screen"
 import { createBrowserRouter } from "react-router-dom"
@@ -26,5 +26,9 @@ export const routerConfig = createBrowserRouter([
   {
     path: "/auth",
     element: <AuthScreen />,
+  },
+  {
+    path: "/profile",
+    element: <ProfileScreen />,
   },
 ])
