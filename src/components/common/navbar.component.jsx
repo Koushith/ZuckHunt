@@ -29,7 +29,10 @@ export const TopBar = () => {
   const isAdmin = true
   const isAuthendicated = true
   return (
-    <div className='border-b '>
+    <div
+      className='border-b '
+      style={{ fontFamily: `Londrina Solid", "sans-serif` }}
+    >
       <div
         className='flex items-center justify-between p-4 mt-0 mb-0 ml-auto mr-auto '
         style={{ maxWidth: "1600px", height: "80px" }}

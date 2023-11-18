@@ -9,13 +9,11 @@ import { Quests } from "./quests.component"
 import {
   Button,
   Modal,
-  ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react"
+import { QuestCard } from "../../components/card/card.component"
 
 export const HomeScreen = () => {
   const [location, setLocation] = useState({
@@ -101,14 +99,19 @@ export const HomeScreen = () => {
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>All Quests</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {/* Add content for the quest details inside the modal */}
-            <Quests />
-          </ModalBody>
+          {/* pass the value */}
+          <Quests />
           <ModalFooter>
-            <Button onClick={handleCloseModal}>Close</Button>
+            <Button
+              width={"100%"}
+              style={{
+                fontFamily: "Londrina Solid",
+                backgroundColor: "#0d6efd",
+                color: "#fff",
+              }}
+            >
+              Grant Location Permission
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -118,6 +121,11 @@ export const HomeScreen = () => {
         id='map'
         style={{ width: "100%", height: "100vh" }}
       >
+        <div
+          style={{ position: "absolute", top: "10px", left: "10px", zIndex: 1 }}
+        >
+          <QuestCard />
+        </div>
         <div>
           {mapboxgl && (
             <ReactMapGL

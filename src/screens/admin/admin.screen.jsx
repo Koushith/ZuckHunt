@@ -395,18 +395,7 @@ function formatDate(timestamp) {
 
 const AppContainer = styled.div`
   max-width: 1500px;
-  margin: 0 auto;
-  .main {
-    display: flex;
-    /* gap: 6rem; */
-    /* padding: 2rem; */
 
-    .outlet {
-      display: flex;
-      /* align-items: center; */
-      justify-content: center;
-
-      width: 100%;
-    }
-  }
+  font-family: "Londrina Solid", "sans-serif";
+  overflow: hidden;
 `
