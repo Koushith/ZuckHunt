@@ -27,6 +27,7 @@ h1{
     background-color: #0d6efd;
     color:white;
     text-decoration: none;
+    border-radius:4px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 `
