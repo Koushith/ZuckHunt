@@ -1,0 +1,14 @@
+include "../node_modules/circomlib/circuits/poseidon.circom";
+
+template GeoPoseHasher() {
+    signal input in[16];
+    signal input hash;
+    signal output out;
+    
+    component poseidon = Poseidon(16);
+    poseidon.inputs <== in;
+    hash === poseidon.out;
+    out <-- hash;
+}
+
+component main = GeoPoseHasher();

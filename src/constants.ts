@@ -1,1 +1,1 @@
-export const backendUrl = 'http://localhost:3000/createHunt'
+export const backendUrl = 'http://localhost:3000/'
