@@ -11,15 +11,14 @@ import {
   Protocols,
 } from "@waku/sdk";
 import { ProtoQuestData } from "../admin/admin.screen.new";
-// import "./App.css";
 const ContentTopic = `/zuckhunt/debug6`;
 const Encoder = createEncoder({ contentTopic: ContentTopic });
 const decoder = createDecoder(ContentTopic);
 import { HomeContainer } from "./home.styles"
 import { Quests } from "./quests.component"
+import ReactMapGl from 'react-map-gl'
 
 import {
-  Button,
   Modal,
   ModalContent,
   ModalFooter,
@@ -294,13 +293,12 @@ export const HomeScreen = () => {
         style={{ width: "100%", height: "100vh" }}
       >
         <div
-          style={{ position: "absolute", top: "10px", left: "10px", zIndex: 1 }}
-        >
+          style={{ position: "absolute", top: "10px", left: "10px", zIndex: 1 }}>
           <QuestCard />
         </div>
         <div>
           {mapboxgl && (
-            <ReactMapGL
+            <ReactMapGl
               width='100%'
               height='100%'
               latitude={location.latitude}
@@ -309,15 +307,15 @@ export const HomeScreen = () => {
               mapboxApiAccessToken={mapboxgl.accessToken}
               mapStyle='mapbox://styles/mapbox/navigation-night-v1'
             >
-              <Marker
+              {/* <Marker
                 latitude={location.latitude}
                 longitude={location.longitude}
                 offsetLeft={-20}
                 offsetTop={-10}
               >
                 <div style={{ color: "red", fontSize: "20px" }}>📍</div>
-              </Marker>
-            </ReactMapGL>
+              </Marker> */}
+            </ReactMapGl>
           )}
         </div>
       </div>
