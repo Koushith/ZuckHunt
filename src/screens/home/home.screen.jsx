@@ -293,7 +293,7 @@ export const HomeScreen = () => {
         style={{ width: "100%", height: "100vh" }}
       >
         <div
-          style={{ position: "absolute", top: "10px", left: "10px", zIndex: 1 }}>
+          style={{ position: "absolute", top: "76px", left: "6px",right:"6px", zIndex: 1 }}>
           <QuestCard />
         </div>
         <div>
