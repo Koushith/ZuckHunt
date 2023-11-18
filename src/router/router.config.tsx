@@ -1,5 +1,5 @@
 import App from "@/App"
-import { HomeScreen } from "@/screens"
+import { HomeScreen ,AdminScreen} from "@/screens"
 import { createBrowserRouter } from "react-router-dom"
 
 export const routerConfig = createBrowserRouter([
@@ -12,5 +12,10 @@ export const routerConfig = createBrowserRouter([
         element: <HomeScreen />,
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <AdminScreen />
+    
   },
 ])

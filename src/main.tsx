@@ -6,6 +6,8 @@ import { ThemeProvider } from "./theme/theme-provider.tsx"
 import { RouterProvider } from "react-router-dom"
 import { routerConfig } from "./router/router.config.tsx"
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react"
+import { ChakraProvider } from '@chakra-ui/react'
+
 
 import { WagmiConfig } from "wagmi"
 import { arbitrum, mainnet } from "viem/chains"
@@ -30,9 +32,13 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <>
+    <ChakraProvider>
+
+
       <WagmiConfig config={wagmiConfig}>
         <RouterProvider router={routerConfig} />
       </WagmiConfig>
+    </ChakraProvider>
     </>
   </React.StrictMode>
 )
