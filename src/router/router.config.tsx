@@ -1,5 +1,7 @@
 import App from "@/App"
-import { HomeScreen ,AdminScreen} from "@/screens"
+import { AdminScreen, HomeScreen } from "@/screens"
+import { ViewQuestsScreen } from "@/screens/admin/view-quests.screen"
+import { AuthScreen } from "@/screens/auth/auth.screen"
 import { createBrowserRouter } from "react-router-dom"
 
 export const routerConfig = createBrowserRouter([
@@ -15,7 +17,14 @@ export const routerConfig = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminScreen />
-    
+    element: <AdminScreen />,
+  },
+  {
+    path: "/view-quests",
+    element: <ViewQuestsScreen />,
+  },
+  {
+    path: "/auth",
+    element: <AuthScreen />,
   },
 ])

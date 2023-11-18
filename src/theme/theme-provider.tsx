@@ -1,3 +1,4 @@
+import { extendTheme } from "@chakra-ui/react"
 import { createContext, useContext, useEffect, useState } from "react"
 
 type Theme = "dark" | "light" | "system"
@@ -71,3 +72,10 @@ export const useTheme = () => {
 
   return context
 }
+
+export const customTheme = extendTheme({
+  fonts: {
+    body: "Londrina Solid, sans-serif",
+    heading: "Londrina Solid, sans-serif",
+  },
+})

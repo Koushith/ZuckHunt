@@ -1,42 +1,27 @@
+//@ts-nocheck
 import React, { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import ReactMapGL, { Marker } from "react-map-gl"
+import { HomeContainer } from "./home.styles"
+import { Quests } from "./quests.component"
+
+import {
+  Button,
+  Modal,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+} from "@chakra-ui/react"
+import { QuestCard } from "../../components/card/card.component"
 
 export const HomeScreen = () => {
   const [location, setLocation] = useState({
     latitude: 41.04628595126438,
     longitude: 41.04628595126438,
   })
-
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const mapContainerRef = useRef(null)
-  // console.log("mapContainerRef", mapContainerRef)
-  // useEffect(() => {
-  //   console.log("useEffect- get cordinates ran")
-  //   if ("geolocation" in navigator) {
-  //     const watchId = navigator.geolocation.watchPosition(
-  //       (position) => {
-  //         const { latitude, longitude } = position.coords
-  //         console.log("latitude and longitude", latitude, longitude)
-  //         setLocation({ latitude, longitude })
-  //       },
-  //       (error) => {
-  //         console.error("Error getting geolocation:", error.message)
-  //       },
-  //       {
-  //         enableHighAccuracy: true,
-  //         timeout: 5000,
-  //         maximumAge: 30000,
-  //       }
-  //     )
-
-  //     return () => {
-  //       navigator.geolocation.clearWatch(watchId)
-  //     }
-  //   } else {
-  //     console.error("Geolocation is not supported by your browser")
-  //   }
-  // }, [])
 
   useEffect(() => {
     mapboxgl.accessToken =
@@ -94,32 +79,76 @@ export const HomeScreen = () => {
     }
   }, [location.latitude, location.longitude])
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+
   return (
-    <div
-      ref={mapContainerRef}
-      id='map'
-      style={{ width: "100%", height: "100vh" }}
-    >
-      {mapboxgl && (
-        <ReactMapGL
-          width='100%'
-          height='100%'
-          latitude={location.latitude}
-          longitude={location.longitude}
-          zoom={18} // Adjust zoom level as needed
-          mapboxApiAccessToken={mapboxgl.accessToken}
-          mapStyle='mapbox://styles/mapbox/navigation-night-v1'
+    <HomeContainer>
+      <div className='header'>
+        <h1>Zuck Hunt</h1>
+        <Button className='btn' onClick={handleOpenModal}>
+          Show Quests
+        </Button>
+      </div>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <ModalOverlay />
+        <ModalContent>
+          {/* pass the value */}
+          <Quests />
+          <ModalFooter>
+            <Button
+              width={"100%"}
+              style={{
+                fontFamily: "Londrina Solid",
+                backgroundColor: "#0d6efd",
+                color: "#fff",
+              }}
+            >
+              Grant Location Permission
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <div
+        ref={mapContainerRef}
+        id='map'
+        style={{ width: "100%", height: "100vh" }}
+      >
+        <div
+          style={{ position: "absolute", top: "10px", left: "10px", zIndex: 1 }}
         >
-          <Marker
-            latitude={location.latitude}
-            longitude={location.longitude}
-            offsetLeft={-20}
-            offsetTop={-10}
-          >
-            <div style={{ color: "red", fontSize: "20px" }}>📍</div>
-          </Marker>
-        </ReactMapGL>
-      )}
-    </div>
+          <QuestCard />
+        </div>
+        <div>
+          {mapboxgl && (
+            <ReactMapGL
+              width='100%'
+              height='100%'
+              latitude={location.latitude}
+              longitude={location.longitude}
+              zoom={18} // Adjust zoom level as needed
+              mapboxApiAccessToken={mapboxgl.accessToken}
+              mapStyle='mapbox://styles/mapbox/navigation-night-v1'
+            >
+              <Marker
+                latitude={location.latitude}
+                longitude={location.longitude}
+                offsetLeft={-20}
+                offsetTop={-10}
+              >
+                <div style={{ color: "red", fontSize: "20px" }}>📍</div>
+              </Marker>
+            </ReactMapGL>
+          )}
+        </div>
+      </div>
+    </HomeContainer>
   )
 }
