@@ -19,7 +19,7 @@ export const QuestCard = (props) => {
 
 const CardContainer = styled.div`
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   max-width: 600px;
   display: flex;
   padding: 6px;
