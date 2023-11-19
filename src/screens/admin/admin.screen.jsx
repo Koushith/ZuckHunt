@@ -24,6 +24,7 @@ import { backendUrl } from "../../constants"
 import { TopBar } from "../../components/common/topbar.component"
 import styled from "styled-components"
 import { GoogleMap, useJsApiLoader, Rectangle } from "@react-google-maps/api"
+import { QuestCard } from "../../components/card/card.component"
 
 const ContentTopic = `/zuckhunt/debug1`
 const Encoder = createEncoder({ contentTopic: ContentTopic })
@@ -50,6 +51,61 @@ export const AdminScreen = () => {
   const [startCords, setStartCords] = useState({ lat: "", lng: "" })
   const [cords1, setCords1] = useState({ lat: "", lng: "" })
   const [cords2, setCords2] = useState({ lat: "", lng: "" })
+
+  const [quests, setQuests] = useState([
+    {
+      questName: "Quest For  GLASSES-DEEP-TEAL",
+      questHint:
+        "Decentralized creativity meets ancient charm at the crossroads of East and West.",
+      questHash:
+        "20656012635723524036702328630164289424646510225511108340787835813842513795043",
+      questSalt: "s2xuu892",
+      questAtrName: "glasses-deep-teal",
+      questAtrType: "glasses",
+      questAtrImg: "glasses-deep-teal.png",
+    },
+    {
+      questName: "Quest For  BG-COOL",
+      questHint: "Unleash your coding magic where continents collide.",
+      questHash:
+        "14228942699358288528220922604750485781308244864246343118051809833184561724003",
+      questSalt: "482wdp8n",
+      questAtrName: "bg-cool",
+      questAtrType: "bg",
+      questAtrImg: "bg-cool.png",
+    },
+    {
+      questName: "Quest For  ACCESSORY-BLING-ANVIL",
+      questHint: "Hack the Bosphorus breeze with your blockchain brilliance.",
+      questHash:
+        "21726448918513788856913228406302511217324886587952113075363295608571349320776",
+      questSalt: "834b58y6",
+      questAtrName: "accessory-bling-anvil",
+      questAtrType: "accessory",
+      questAtrImg: "accessory-bling-anvil.png",
+    },
+    {
+      questName: "Quest For  BODY-PEACHY-B",
+      questHint: "Innovate where history and technology intertwine.",
+      questHash:
+        "8614960715691933623580508869231933685522103729909663513292523830737760087415",
+      questSalt: "dkn6evpn",
+      questAtrName: "body-peachy-B",
+      questAtrType: "body",
+      questAtrImg: "body-peachy-B.png",
+    },
+    {
+      questName: "Quest For  HEAD-BELUGA.PNG",
+      questHint: "Elevate your code amidst the echoes of Byzantine brilliance.",
+      questHash:
+        "13178095318700154901199369371168412414205596719531432013364934552841283516671",
+      questSalt: "knt94pu4",
+      questAtrName: "head-beluga.png",
+      questAtrType: "head",
+      questAtrImg: "head-beluga.png",
+    },
+  ])
+
   console.log("coordinates", cords1, cords2)
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -152,182 +208,107 @@ export const AdminScreen = () => {
   //   const isError = input === ''
   return (
     <AppContainer>
-      <div className='top-nav'>
-        <TopBar />
-      </div>
-      <div className='main mt-6'>
-        {/* <SideBar /> */}
-        <div className='outlet'>
-          <Container mt={8}>
-            <h1>Add New Quest</h1>
-            <FormControl mt={4}>
-              <FormLabel>Name</FormLabel>
-              <Input
-                type='text'
-                value={questName}
-                onChange={handleNameChange}
-              />
-              <FormErrorMessage>Name is required.</FormErrorMessage>
-            </FormControl>
+      <TopBar />
 
-            <FormControl mt={2}>
-              <FormLabel>Hint</FormLabel>
-              <Input
-                type='text'
-                value={questHint}
-                onChange={handleHintChange}
-              />
-              <FormErrorMessage>Hint is required.</FormErrorMessage>
-            </FormControl>
+      {/* <SideBar /> */}
+      <div className='container'>
+        <div className='mt-28'>
+          <h1>Add New Quest</h1>
+          <FormControl mt={4}>
+            <FormLabel>Name</FormLabel>
+            <Input type='text' value={questName} onChange={handleNameChange} />
+            <FormErrorMessage>Name is required.</FormErrorMessage>
+          </FormControl>
 
-            <Box mt={4}>
-              <div>Select the Coordinates</div>
+          <FormControl mt={2}>
+            <FormLabel>Hint</FormLabel>
+            <Input type='text' value={questHint} onChange={handleHintChange} />
+            <FormErrorMessage>Hint is required.</FormErrorMessage>
+          </FormControl>
 
-              {/* Latitude 1 */}
-              {/* <FormControl mt={2}>
-                <FormLabel>Latitude 1</FormLabel>
-                <Input
-                  type='text'
-                  value={polygonData.lat1}
-                  onChange={handleLat1Change}
-                />
-                <FormErrorMessage>Latitude 1 is required.</FormErrorMessage>
-              </FormControl> */}
+          <div className='mt-24' style={{ maxWidth: "600px" }}>
+            <div>Select the Coordinates</div>
 
-              {/* Longitude 1 */}
-              {/* <FormControl mt={2}>
-                <FormLabel>Longitude 1</FormLabel>
-                <Input
-                  type='text'
-                  value={polygonData.lon1}
-                  onChange={handleLon1Change}
-                />
-                <FormErrorMessage>Longitude 1 is required.</FormErrorMessage>
-              </FormControl> */}
-
-              {/* Latitude 2 */}
-              {/* <FormControl mt={2}>
-                <FormLabel>Latitude 2</FormLabel>
-                <Input
-                  type='text'
-                  value={polygonData.lat2}
-                  onChange={handleLat2Change}
-                />
-                <FormErrorMessage>Latitude 2 is required.</FormErrorMessage>
-              </FormControl> */}
-
-              {/* Longitude 2 */}
-              {/* <FormControl mt={2}>
-                <FormLabel>Longitude 2</FormLabel>
-                <Input
-                  type='number'
-                  value={polygonData.lon2}
-                  onChange={handleLon2Change}
-                />
-                <FormErrorMessage>Longitude 2 is required.</FormErrorMessage>
-              </FormControl> */}
-
-              {/* Map */}
-              {/* <div
-                ref={mapContainerRef}
-                id='map'
-                className='mt-4'
-                style={{ width: "100%", height: "100vh" }}
-              >
-                {mapboxgl && (
-                  <ReactMapGL
-                    width='100%'
-                    height='100%'
-                    latitude={location.latitude}
-                    longitude={location.longitude}
-                    zoom={18}
-                    mapboxApiAccessToken={mapboxgl.accessToken}
-                    mapStyle='mapbox://styles/mapbox/navigation-night-v1'
+            {isLoaded ? (
+              <>
+                <div>
+                  <GoogleMap
+                    onClick={handleMapClick}
+                    zoom={13}
+                    center={startCords}
+                    mapContainerStyle={{ width: "460px", height: "80vh" }}
                   >
-                    <Marker
-                      latitude={location.latitude}
-                      longitude={location.longitude}
-                      offsetLeft={-20}
-                      offsetTop={-10}
-                    >
-                      <div style={{ color: "red", fontSize: "20px" }}>📍</div>
-                    </Marker>
-                  </ReactMapGL>
-                )}
-              </div> */}
-              {isLoaded ? (
-                <>
-                  <div>
-                    <GoogleMap
-                      onClick={handleMapClick}
-                      zoom={13}
-                      center={startCords}
-                      mapContainerStyle={{ width: "100vw", height: "80vh" }}
-                    >
-                      {cords1.lat.length &&
-                        cords1.lng.length &&
-                        cords2.lat.length &&
-                        cords2.lng.length && (
-                          <Rectangle
-                            bounds={{
-                              north: parseFloat(cords1.lat),
-                              south: parseFloat(cords2.lat),
-                              east: parseFloat(cords2.lng),
-                              west: parseFloat(cords1.lng),
-                            }}
-                          />
-                        )}
-                    </GoogleMap>
-                  </div>
-                </>
-              ) : (
-                <>loading</>
-              )}
+                    {cords1.lat.length &&
+                      cords1.lng.length &&
+                      cords2.lat.length &&
+                      cords2.lng.length && (
+                        <Rectangle
+                          bounds={{
+                            north: parseFloat(cords1.lat),
+                            south: parseFloat(cords2.lat),
+                            east: parseFloat(cords2.lng),
+                            west: parseFloat(cords1.lng),
+                          }}
+                        />
+                      )}
+                  </GoogleMap>
+                </div>
+              </>
+            ) : (
+              <>loading</>
+            )}
 
-              {/* Submit Button */}
-              <Button
-                colorScheme='pink'
-                variant='solid'
-                mt={4}
-                onClick={async () => {
-                  if (questHint.length < 3 || questName.length < 3) {
-                    return alert("Quest Name and Hint are required.")
-                  }
+            {/* Submit Button */}
+            <Button
+              colorScheme='pink'
+              variant='solid'
+              mt={4}
+              onClick={async () => {
+                if (questHint.length < 3 || questName.length < 3) {
+                  return alert("Quest Name and Hint are required.")
+                }
 
-                  // Additional validation can be added if needed
+                // Additional validation can be added if needed
 
-                  await fetch(backendUrl, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
+                await fetch(backendUrl, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    name: questName,
+                    positionData: {
+                      lat1: cords1.lat,
+                      lon1: cords1.lng,
+                      lat2: cords2.lat,
+                      lon2: cords2.lng,
                     },
-                    body: JSON.stringify({
-                      name: questName,
-                      positionData: {
-                        lat1: cords1.lat,
-                        lon1: cords1.lng,
-                        lat2: cords2.lat,
-                        lon2: cords2.lng,
-                      },
-                      testInput: {
-                        latitude: 12973386619205718,
-                        longitude: 7501257511191976,
-                      },
-                      hint: questHint,
-                    }),
-                  })
+                    testInput: {
+                      latitude: 12973386619205718,
+                      longitude: 7501257511191976,
+                    },
+                    hint: questHint,
+                  }),
+                })
 
-                  sendMessage(questName, questHint, waku).then(() =>
-                    console.log("Message sent")
-                  )
+                sendMessage(questName, questHint, waku).then(() =>
+                  console.log("Message sent")
+                )
 
-                  setSendCounter(sendCounter + 1)
-                }}
-              >
-                Submit
-              </Button>
-            </Box>
-          </Container>
+                setSendCounter(sendCounter + 1)
+              }}
+            >
+              Submit
+            </Button>
+          </div>
+        </div>
+        <div>
+          <h1>Avaliable Nouns</h1>
+          <div>
+            {quests.map((q) => (
+              <QuestCard quest={q} />
+            ))}
+          </div>
         </div>
       </div>
     </AppContainer>
@@ -394,8 +375,15 @@ function formatDate(timestamp) {
 }
 
 const AppContainer = styled.div`
-  max-width: 1500px;
-
   font-family: "Londrina Solid", "sans-serif";
-  overflow: hidden;
+  margin: 0 auto;
+  .container {
+    display: flex;
+    gap: 60px;
+    margin-top: 60px;
+    justify-content: center;
+    h1 {
+      font-size: 22px;
+    }
+  }
 `

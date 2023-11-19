@@ -19,12 +19,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ProtoQuestData } from "../admin/admin.screen.new"
-const ContentTopic = `/zuckhunt/debug6`
-const decoder = createDecoder(ContentTopic)
+import { WakuContentTopic } from "../../constants"
+const decoder = createDecoder(WakuContentTopic)
 import { HomeContainer } from "./home.styles"
 import { Quests } from "./quests.component"
 import ReactMapGl from "react-map-gl"
-import { WakuContentTopic } from "../../constants"
 
 import Geohash from "latlon-geohash"
 
@@ -47,6 +46,8 @@ export const HomeScreen = () => {
   const [waku, setWaku] = useState(undefined)
   const [wakuStatus, setWakuStatus] = useState("None")
   const [selectedQuest, setSelectedQuest] = useState()
+  const [proof, setProof] = useState()
+  const [publicSignals, setPublicSignals] = useState()
   const [quests, setQuests] = useState([
     {
       questName: "Quest For  GLASSES-DEEP-TEAL",
@@ -179,6 +180,7 @@ export const HomeScreen = () => {
     longitude: 28.987,
   })
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isCamModalOpen, setIsCamModalOpen] = useState(false)
   const mapContainerRef = useRef(null)
 
   useEffect(() => {
@@ -324,9 +326,15 @@ export const HomeScreen = () => {
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen)
   }
-
   const handleCloseModal = () => {
     setIsModalOpen(false)
+  }
+
+  const handleOpenCamModal = () => {
+    setIsCamModalOpen(!isCamModalOpen)
+  }
+  const handleCloseCamModal = () => {
+    setIsCamModalOpen(false)
   }
 
   return (
@@ -363,6 +371,36 @@ export const HomeScreen = () => {
               onClick={() => getPermissions()}
             >
               Grant Location Permission
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* cam modal */}
+
+      <Modal isOpen={isCamModalOpen} onClose={handleCloseCamModal}>
+        <ModalOverlay />
+        <ModalContent>
+          {/* pass the value */}
+          {proof && publicSignals ? (
+            <iframe
+              width={"100%"}
+              height={"800px"}
+              allow='camera *;microphone *'
+              src={`https://bgc-trophy.web.app/?url=/${
+                selectedQuest?.questAtrImg
+              }&publicsignals=${btoa(
+                JSON.stringify(publicSignals)
+              )}&address=0x237ae8ff0815AED78d8A76c1267Bb1922492d4D7&proof=${btoa(
+                JSON.stringify(proof)
+              )}`}
+            />
+          ) : (
+            <></>
+          )}
+          <ModalFooter>
+            <Button onClick={handleCloseCamModal} className='btn'>
+              Close
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -419,6 +457,8 @@ export const HomeScreen = () => {
               zIndex: "999",
             }}
             onClick={async () => {
+              //demo
+
               const snarkjs = window.snarkjs
               const geohash = Geohash.encode(
                 location.latitude,
@@ -443,6 +483,9 @@ export const HomeScreen = () => {
                 "circuit_0000.zkey"
               )
               alert(publicSignals)
+              setProof(proof)
+              setPublicSignals(publicSignals)
+              handleOpenCamModal()
             }}
           >
             Gen Proof
