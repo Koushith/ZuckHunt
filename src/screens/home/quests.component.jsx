@@ -38,7 +38,8 @@ const ViewQuestContainer = styled.div`
   }
 `
 
-export const Quests = () => {
+export const Quests = ({quests,setSelectedQuest,handleCloseModal}) => {
+  console.log(setSelectedQuest)
   return (
     <ViewQuestContainer>
       {/* <TopBar /> */}
@@ -50,8 +51,9 @@ export const Quests = () => {
           {/* <h1>some info</h1> */}
 
           <div className='container'>
-            <QuestCard />
-            <QuestCard /> <QuestCard /> <QuestCard />
+           {quests.map(quest => (<div onClick={() => {setSelectedQuest(quest)
+             handleCloseModal()}
+             }> <QuestCard  quest={quest} /></div>))}
           </div>
         </div>
       </div>

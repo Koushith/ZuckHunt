@@ -6,7 +6,6 @@ import { Button, Flex } from "@chakra-ui/react"
 import {
   createLightNode,
   createDecoder,
-  createEncoder,
   waitForRemotePeer,
   Protocols,
 } from "@waku/sdk"
@@ -26,6 +25,15 @@ const decoder = createDecoder(ContentTopic)
 import { HomeContainer } from "./home.styles"
 import { Quests } from "./quests.component"
 import ReactMapGl from "react-map-gl"
+import { ProtoQuestData } from "../admin/admin.screen.new";
+import { WakuContentTopic } from '../../constants';
+
+const decoder = createDecoder(WakuContentTopic);
+import { HomeContainer } from "./home.styles"
+import { Quests } from "./quests.component"
+import ReactMapGl from 'react-map-gl'
+import Geohash  from 'latlon-geohash';
+
 
 import {
   Modal,
@@ -39,12 +47,63 @@ import { HamburgerMenuIcon, IconJarLogoIcon } from "@radix-ui/react-icons"
 import { useAddress } from "@thirdweb-dev/react"
 import { useNavigate } from "react-router-dom"
 
+
+const salterStrig = '0123456789bcdefghjkmnpqrstuvwxyz'
 export const HomeScreen = () => {
-  const [waku, setWaku] = useState(undefined)
-  const [wakuStatus, setWakuStatus] = useState("None")
-  const [quests, setQuests] = useState([])
   const address = useAddress()
   const navigate = useNavigate()
+  const [waku, setWaku] = useState(undefined);
+  const [wakuStatus, setWakuStatus] = useState("None");
+  const [selectedQuest, setSelectedQuest] = useState();
+  const [quests, setQuests] = useState([
+    {
+        "questName": "Quest For  GLASSES-DEEP-TEAL",
+        "questHint": "Decentralized creativity meets ancient charm at the crossroads of East and West.",
+        "questHash": "20656012635723524036702328630164289424646510225511108340787835813842513795043",
+        "questSalt": "s2xuu892",
+        "questAtrName": "glasses-deep-teal",
+        "questAtrType": "glasses",
+        "questAtrImg": "glasses-deep-teal.png"
+    },
+    {
+        "questName": "Quest For  BG-COOL",
+        "questHint": "Unleash your coding magic where continents collide.",
+        "questHash": "14228942699358288528220922604750485781308244864246343118051809833184561724003",
+        "questSalt": "482wdp8n",
+        "questAtrName": "bg-cool",
+        "questAtrType": "bg",
+        "questAtrImg": "bg-cool.png"
+    },
+    {
+        "questName": "Quest For  ACCESSORY-BLING-ANVIL",
+        "questHint": "Hack the Bosphorus breeze with your blockchain brilliance.",
+        "questHash": "21726448918513788856913228406302511217324886587952113075363295608571349320776",
+        "questSalt": "834b58y6",
+        "questAtrName": "accessory-bling-anvil",
+        "questAtrType": "accessory",
+        "questAtrImg": "accessory-bling-anvil.png"
+    },
+    {
+        "questName": "Quest For  BODY-PEACHY-B",
+        "questHint": "Innovate where history and technology intertwine.",
+        "questHash": "8614960715691933623580508869231933685522103729909663513292523830737760087415",
+        "questSalt": "dkn6evpn",
+        "questAtrName": "body-peachy-B",
+        "questAtrType": "body",
+        "questAtrImg": "body-peachy-B.png"
+    },
+    {
+        "questName": "Quest For  HEAD-BELUGA.PNG",
+        "questHint": "Elevate your code amidst the echoes of Byzantine brilliance.",
+        "questHash": "13178095318700154901199369371168412414205596719531432013364934552841283516671",
+        "questSalt": "knt94pu4",
+        "questAtrName": "head-beluga.png",
+        "questAtrType": "head",
+        "questAtrImg": "head-beluga.png"
+    }
+]);
+
+
 
   useEffect(() => {
     if (!address) {
@@ -107,9 +166,7 @@ export const HomeScreen = () => {
           )
 
           console.log({ messages })
-          setQuests((currentQuests) => {
-            return currentQuests.concat(quests.filter(Boolean).reverse())
-          })
+          setQuests([...messages]);
         }
       } catch (e) {
         console.log("Failed to retrieve messages", e)
@@ -122,8 +179,8 @@ export const HomeScreen = () => {
   let map = useRef()
   let objModel = useRef()
   const [location, setLocation] = useState({
-    latitude: 41.04628595126438,
-    longitude: 41.04628595126438,
+    latitude: 41.0477,
+    longitude:  28.987,
   })
   const [isModalOpen, setIsModalOpen] = useState(false)
   const mapContainerRef = useRef(null)
@@ -177,8 +234,8 @@ export const HomeScreen = () => {
           id: "custom-threebox-model",
           type: "custom",
           renderingMode: "3d",
-          onAdd: function () {
-            const scale = 0.06
+          onAdd: async function () {
+            const scale = 0.06;
             const options = {
               obj: "/public/scene.gltf",
               type: "gltf",
@@ -188,15 +245,17 @@ export const HomeScreen = () => {
             }
 
             tb.loadObj(options, (model) => {
-              objModel.current = model
-              model.setCoords([longitude, latitude])
-              model.setRotation({ x: 0, y: 0, z: 241 })
-              tb.add(model)
-            })
+              // alert(`added  ${latitude}, ${longitude}`)
+              objModel.current = model;
+              model.setCoords([longitude, latitude]);
+              model.setRotation({ x: 0, y: 0, z: 241 });
+              tb.add(model);
+            });
           },
 
           render: function () {
-            tb.update()
+            tb.update();
+
           },
         })
       }
@@ -206,17 +265,14 @@ export const HomeScreen = () => {
       console.error("Error getting location:", error)
     }
 
-    // const watchId = navigator.geolocation.watchPosition(
-    //   handleGeolocationSuccess,
-    //   handleGeolocationError
-    // );
 
     map.current.on("style.load", () => {
-      navigator.geolocation.getCurrentPosition(
+      navigator.geolocation.watchPosition(
         handleGeolocationSuccess,
         handleGeolocationError
-      )
-    })
+      );
+      
+    });
 
     return () => {
       window.removeEventListener("deviceorientation", handleDeviceMotion)
@@ -273,7 +329,8 @@ export const HomeScreen = () => {
   }
 
   const handleOpenModal = () => {
-    setIsModalOpen(true)
+    
+    setIsModalOpen(!isModalOpen)
   }
 
   const handleCloseModal = () => {
@@ -298,7 +355,7 @@ export const HomeScreen = () => {
         <ModalOverlay />
         <ModalContent>
           {/* pass the value */}
-          <Quests />
+          <Quests quests={quests}  setSelectedQuest={setSelectedQuest} handleCloseModal={handleCloseModal}/>
           <ModalFooter>
             <Button
               width={"100%"}
@@ -307,13 +364,38 @@ export const HomeScreen = () => {
                 backgroundColor: "#0d6efd",
                 color: "#fff",
               }}
+              onClick={() => getPermissions()}
             >
               Grant Location Permission
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-
+      <Button
+              width={"100%"}
+              style={{
+                fontFamily: "Londrina Solid",
+                backgroundColor: "#0d6efd",
+                color: "#fff",
+                zIndex: '999'
+              }}
+              onClick={ async () => {
+                const snarkjs = window.snarkjs;
+                const geohash = Geohash.encode(location.latitude,location.longitude,6)
+                // console.log({geohash})
+                const salt = selectedQuest.questSalt
+                const geohashExt = geohash + salt
+                const geoHashExtIntArray = geohashExt.split('')
+                const saltCharArray = salterStrig.split('')
+                const geoHashExtIntArrayEncoded = geoHashExtIntArray.map(e => saltCharArray.indexOf(e))
+          // console.log({ "in": geoHashExtIntArrayEncoded,  "hash": selectedQuest.questHash })
+                const {proof, publicSignals} = await snarkjs.groth16.fullProve({ "in": geoHashExtIntArrayEncoded,  "hash": selectedQuest.questHash }, "circuit.wasm", "circuit_0000.zkey")
+                alert( publicSignals )
+               
+              }}
+            >
+              Gen Proof
+            </Button>
       <div
         ref={mapContainerRef}
         id='map'
@@ -332,6 +414,7 @@ export const HomeScreen = () => {
           <QuestCard />
         </div>
         <div>
+          
           {mapboxgl && (
             <ReactMapGl
               width='100%'
@@ -341,16 +424,9 @@ export const HomeScreen = () => {
               zoom={18} // Adjust zoom level as needed
               mapboxApiAccessToken={mapboxgl.accessToken}
               mapStyle='mapbox://styles/mapbox/navigation-night-v1'
-            >
-              {/* <Marker
-                latitude={location.latitude}
-                longitude={location.longitude}
-                offsetLeft={-20}
-                offsetTop={-10}
-              >
-                <div style={{ color: "red", fontSize: "20px" }}>📍</div>
-              </Marker> */}
-            </ReactMapGl>
+            />
+             
+            
           )}
         </div>
 
@@ -389,4 +465,24 @@ export const HomeScreen = () => {
       </div>
     </HomeContainer>
   )
+}
+
+function decodeMessage(wakuMessage) {
+  if (!wakuMessage.payload) return;
+
+  const { questName,questHint,questHash,questSalt,questAtrName,questAtrType,questAtrImg ,timestamp} = ProtoQuestData.decode(
+    wakuMessage.payload
+  );
+
+  // if (!timestamp || !questHint || !questName) return;
+
+  const time = new Date();
+  time.setTime(Number(timestamp));
+
+  // const utf8Text = bytesToUtf8(text);
+
+  return {
+    questName,questHint,questHash,questSalt,questAtrName,questAtrType,questAtrImg,
+    timestampInt: wakuMessage.timestamp,
+  }
 }

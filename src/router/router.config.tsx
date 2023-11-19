@@ -20,6 +20,14 @@ export const routerConfig = createBrowserRouter([
     element: <AdminScreen />,
   },
   {
+    path: "/debug",
+    element: <AdminScreenNew />,
+  },
+  {
+    path: "/admin",
+    element: <AdminScreen />,
+  },
+  {
     path: "/view-quests",
     element: <ViewQuestsScreen />,
   },

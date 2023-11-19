@@ -9,10 +9,10 @@ import {
   waitForRemotePeer,
   Protocols,
 } from "@waku/sdk";
+import { WakuContentTopic } from '../../constants';
 
 
-const ContentTopic = `/zuckhunt/debug6`;
-const Encoder = createEncoder({ contentTopic: ContentTopic });
+const Encoder = createEncoder({ contentTopic: WakuContentTopic });
 import Geohash  from 'latlon-geohash';
 import { Button,Container } from '@chakra-ui/react';
 
@@ -78,13 +78,14 @@ export const AdminScreenNew = () => {
 
 <h1>{wakuStatus}</h1>
       <Button colorScheme='pink' variant='solid' onClick={async () => {
-        if (!waku) return alert("wait for waku init");
+        window.temp = []
+        // if (!waku) return alert("wait for waku init");
         const data = [
           {questAtrName : "glasses-deep-teal",questAtrType:"glasses",questAtrImg:"glasses-deep-teal.png",hint:"Decentralized creativity meets ancient charm at the crossroads of East and West."},
           {questAtrName : "bg-cool",questAtrType:"bg",questAtrImg:"bg-cool.png",hint:"Unleash your coding magic where continents collide."},
           {questAtrName : "accessory-bling-anvil",questAtrType:"accessory",questAtrImg:"accessory-bling-anvil.png",hint:"Hack the Bosphorus breeze with your blockchain brilliance."},
           {questAtrName : "body-peachy-B",questAtrType:"body",questAtrImg:"body-peachy-B.png",hint:"Innovate where history and technology intertwine."},
-          {questAtrName : "head-beluga.png",questAtrType:"head",questAtrImg:"head-beluga.png.png",hint:"Elevate your code amidst the echoes of Byzantine brilliance."        }
+          {questAtrName : "head-beluga.png",questAtrType:"head",questAtrImg:"head-beluga.png",hint:"Elevate your code amidst the echoes of Byzantine brilliance."        }
         ]
         data.forEach( async (d) => {
           const name = `Quest For  ${d.questAtrName.toUpperCase()}`
@@ -102,10 +103,14 @@ export const AdminScreenNew = () => {
           }})
           const hashResData = await hashRes.json()
           const hash = hashResData.data
+          window.temp.push({
+            questName :name , questHint :d.hint,questHash : hash,questSalt:salt,questAtrName: d.questAtrName,questAtrType:d.questAtrType,questAtrImg:d.questAtrImg
+          })
           if (wakuStatus !== "Connected") return alert("wait for waku conect"+wakuStatus);
           await sendMessage(name,d.hint,hash,salt,d.questAtrName,d.questAtrType,d.questAtrImg, waku)
         })
-        alert("sent")
+        console.log(window.temp)
+        // alert("sent")
         
       }}>
         Button

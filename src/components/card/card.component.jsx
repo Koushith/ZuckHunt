@@ -3,14 +3,16 @@ import Nouns from "../../assets/game-assets/nouns.svg"
 
 export const QuestCard = (props) => {
   // use this
-  const { name, hint, image } = props
+  console.log(props)
+  const quest = props.quest ? props.quest : {}
+  const { questName,questHint,questHash,questSalt,questAtrName,questAtrType,questAtrImg } = quest
   return (
     <CardContainer className='card'>
-      <img src={Nouns} alt='nouns' />
-      <div className='info'>
-        <h2>Name</h2>
+      <img src={`/${questAtrImg}`} alt='nouns' />
+      <div className='info' style={{border:' 2px solid #555;'}}>
+        <h2 style={{fontWeight:'bold',fontFamily:'"Londrina Solid", "sans-serif";'}}>{questName}</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, illo.
+          {questHint}
         </p>
       </div>
     </CardContainer>
