@@ -1,10 +1,10 @@
-Project Title: GoNouns Zero Knowledge Treasure Hunt with AR NFT Minting
+### Project Title: GoNouns Zero Knowledge Treasure Hunt with AR NFT Minting
 
-Description:
+#### Description:
 
 Embark on a revolutionary adventure that merges the thrill of a treasure hunt with cutting-edge technology. The Zero Knowledge Treasure Hunt with AR NFT Minting is a unique project that invites participants to explore the real world, solve cryptic clues using zero-knowledge proofs, and mint exclusive NFTs at augmented reality (AR) hotspots.
 
-Key Features:
+#### Key Features:
 
 Zero-Knowledge Proofs: Engage in a treasure hunt where your ingenuity is your greatest asset. Each clue leverages zero-knowledge proofs, providing a challenging yet rewarding experience.
 
@@ -14,7 +14,7 @@ NFT Minting: Discover and claim one-of-a-kind treasures in the form of NFTs. Min
 
 Community Collaboration: Join forces with friends or fellow adventurers. Some clues may require collaboration and shared knowledge, fostering a sense of community among participants.
 
-Why Join the Adventure?
+#### Why Join the Adventure?
 
 Innovative Technology: Experience the forefront of technology by participating in a treasure hunt that utilizes zero-knowledge proofs and augmented reality.
 
