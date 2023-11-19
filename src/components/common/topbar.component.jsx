@@ -31,6 +31,15 @@ export const TopBar = () => {
             <p
               className='cursor-pointe'
               style={{ color: "#fff" }}
+              onClick={() => navigate("/all-nfts")}
+            >
+              All NFTS
+            </p>
+          </div>
+          <div className='mr-2'>
+            <p
+              className='cursor-pointe'
+              style={{ color: "#fff" }}
               onClick={() => navigate("/profile")}
             >
               Profile

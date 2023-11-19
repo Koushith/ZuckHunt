@@ -1,6 +1,12 @@
 import App from "@/App"
-import { AdminScreen, HomeScreen, ProfileScreen,AdminScreenNew } from "@/screens"
+import {
+  AdminScreen,
+  HomeScreen,
+  ProfileScreen,
+  AdminScreenNew,
+} from "@/screens"
 import { ViewQuestsScreen } from "@/screens/admin/view-quests.screen"
+import { AllNftsScreen } from "@/screens/all-nfts/all-nfts.screen"
 import { AuthScreen } from "@/screens/auth/auth.screen"
 import { createBrowserRouter } from "react-router-dom"
 
@@ -38,5 +44,9 @@ export const routerConfig = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfileScreen />,
+  },
+  {
+    path: "/all-nfts",
+    element: <AllNftsScreen />,
   },
 ])
