@@ -20,18 +20,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ProtoQuestData } from "../admin/admin.screen.new"
 const ContentTopic = `/zuckhunt/debug6`
-const Encoder = createEncoder({ contentTopic: ContentTopic })
 const decoder = createDecoder(ContentTopic)
 import { HomeContainer } from "./home.styles"
 import { Quests } from "./quests.component"
 import ReactMapGl from "react-map-gl"
-import { ProtoQuestData } from "../admin/admin.screen.new";
 import { WakuContentTopic } from '../../constants';
 
-const decoder = createDecoder(WakuContentTopic);
-import { HomeContainer } from "./home.styles"
-import { Quests } from "./quests.component"
-import ReactMapGl from 'react-map-gl'
 import Geohash  from 'latlon-geohash';
 
 

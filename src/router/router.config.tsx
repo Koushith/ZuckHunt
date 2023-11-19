@@ -1,5 +1,5 @@
 import App from "@/App"
-import { AdminScreen, HomeScreen, ProfileScreen } from "@/screens"
+import { AdminScreen, HomeScreen, ProfileScreen,AdminScreenNew } from "@/screens"
 import { ViewQuestsScreen } from "@/screens/admin/view-quests.screen"
 import { AuthScreen } from "@/screens/auth/auth.screen"
 import { createBrowserRouter } from "react-router-dom"
