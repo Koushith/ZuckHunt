@@ -5,7 +5,7 @@ export const AllNftsScreen = () => {
   return (
     <AllNFTContainer>
       <TopBar />
-      <h1>All NFTS</h1>
+      <h1 style={{ marginLeft: "10px", fontSize: "20px" }}>All NFTS</h1>
 
       <div className='nfts'>
         <div className='card'>
@@ -28,13 +28,17 @@ const AllNFTContainer = styled.div`
     padding: 10px;
 
     .card {
+      min-width: 300px;
       border-radius: 4px;
+      border: 1px solid #79809c;
+      padding: 10px;
       img {
         width: 100%;
       }
 
       h2 {
         color: #202429;
+        margin-top: 10px;
       }
       p {
         color: #79809c;
