@@ -226,7 +226,10 @@ export const AdminScreen = () => {
             <FormErrorMessage>Hint is required.</FormErrorMessage>
           </FormControl>
 
-          <div className='mt-24' style={{ maxWidth: "600px" }}>
+          <div
+            className='mt-24'
+            style={{ maxWidth: "600px", marginTop: "10px" }}
+          >
             <div>Select the Coordinates</div>
 
             {isLoaded ? (
@@ -236,7 +239,7 @@ export const AdminScreen = () => {
                     onClick={handleMapClick}
                     zoom={13}
                     center={startCords}
-                    mapContainerStyle={{ width: "460px", height: "80vh" }}
+                    mapContainerStyle={{ width: "460px", height: "460px" }}
                   >
                     {cords1.lat.length &&
                       cords1.lng.length &&
