@@ -1,6 +1,24 @@
-# React + TypeScript + Vite
+Project Title: GoNouns Zero Knowledge Treasure Hunt with AR NFT Minting
 
-# GONouns
+Description:
+
+Embark on a revolutionary adventure that merges the thrill of a treasure hunt with cutting-edge technology. The Zero Knowledge Treasure Hunt with AR NFT Minting is a unique project that invites participants to explore the real world, solve cryptic clues using zero-knowledge proofs, and mint exclusive NFTs at augmented reality (AR) hotspots.
+
+Key Features:
+
+Zero-Knowledge Proofs: Engage in a treasure hunt where your ingenuity is your greatest asset. Each clue leverages zero-knowledge proofs, providing a challenging yet rewarding experience.
+
+Augmented Reality (AR): Immerse yourself in a seamless blend of the virtual and real worlds. Use your AR-enabled smartphone to unveil hidden hints, directions, and unique NFT minting locations.
+
+NFT Minting: Discover and claim one-of-a-kind treasures in the form of NFTs. Mint these digital assets using your Ethereum wallet as a testament to your successful journey.
+
+Community Collaboration: Join forces with friends or fellow adventurers. Some clues may require collaboration and shared knowledge, fostering a sense of community among participants.
+
+Why Join the Adventure?
+
+Innovative Technology: Experience the forefront of technology by participating in a treasure hunt that utilizes zero-knowledge proofs and augmented reality.
+
+Exclusive Rewards: Successfully completing the hunt and minting all NFTs unlocks exclusive rewards, including unique AR experiences and special edition NFTs.
 
 ### Screenshots
 
