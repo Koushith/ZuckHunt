@@ -49,6 +49,7 @@ const CardContainer = styled.div`
   background-color: #fff;
   .info {
     p {
+      margin-top: 2px;
       font-size: 14px;
       color: #646464;
     }

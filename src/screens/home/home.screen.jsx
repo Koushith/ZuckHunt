@@ -442,7 +442,7 @@ export const HomeScreen = () => {
             width={"100%"}
             style={{
               fontFamily: "Londrina Solid",
-              backgroundColor: "#0d6efd",
+              backgroundColor: "#FF0E0E",
               color: "#fff",
               zIndex: "999",
             }}

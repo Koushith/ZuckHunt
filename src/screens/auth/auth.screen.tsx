@@ -29,7 +29,7 @@ export const AuthScreen = () => {
       <div className='form'>
         <img src='https://nouns.wtf/static/media/noggles.7644bfd0.svg' />
         <div className='action'>
-          <h1>Sign in to ZuckHunt</h1>
+          <h1>Sign in to GoNouns</h1>
           <ConnectWallet />
         </div>
       </div>
