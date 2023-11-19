@@ -2,22 +2,14 @@
 //@ts-nocheck
 import React, { useRef, useEffect, useState } from "react"
 import mapboxgl from "mapbox-gl"
-import { Button, Flex } from "@chakra-ui/react"
+import { Button } from "@chakra-ui/react"
 import {
   createLightNode,
   createDecoder,
   waitForRemotePeer,
   Protocols,
 } from "@waku/sdk"
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import Logo from "../../assets/logo2.svg"
 import { ProtoQuestData } from "../admin/admin.screen.new"
 import { WakuContentTopic } from "../../constants"
 const decoder = createDecoder(WakuContentTopic)
@@ -34,8 +26,6 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react"
 import { QuestCard } from "../../components/card/card.component"
-import { BoxIcon, MSquare } from "lucide-react"
-import { HamburgerMenuIcon, IconJarLogoIcon } from "@radix-ui/react-icons"
 import { useAddress } from "@thirdweb-dev/react"
 import { useNavigate } from "react-router-dom"
 
@@ -340,7 +330,7 @@ export const HomeScreen = () => {
   return (
     <HomeContainer>
       <div className='header'>
-        <h1>Zuck Hunt</h1>
+        <img src={Logo} width={80} onClick={() => navigate("/")} />
         <div className='flex gap-4 items-center menu'>
           <h2 className='cursor-pointer' onClick={() => navigate("/profile")}>
             Profile
@@ -488,7 +478,7 @@ export const HomeScreen = () => {
               handleOpenCamModal()
             }}
           >
-            Gen Proof
+            Pick Up 🤌
           </Button>
         </div>
 
