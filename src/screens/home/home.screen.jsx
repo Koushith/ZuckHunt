@@ -24,10 +24,9 @@ const decoder = createDecoder(ContentTopic)
 import { HomeContainer } from "./home.styles"
 import { Quests } from "./quests.component"
 import ReactMapGl from "react-map-gl"
-import { WakuContentTopic } from '../../constants';
+import { WakuContentTopic } from "../../constants"
 
-import Geohash  from 'latlon-geohash';
-
+import Geohash from "latlon-geohash"
 
 import {
   Modal,
@@ -41,69 +40,72 @@ import { HamburgerMenuIcon, IconJarLogoIcon } from "@radix-ui/react-icons"
 import { useAddress } from "@thirdweb-dev/react"
 import { useNavigate } from "react-router-dom"
 
-
-const salterStrig = '0123456789bcdefghjkmnpqrstuvwxyz'
+const salterStrig = "0123456789bcdefghjkmnpqrstuvwxyz"
 export const HomeScreen = () => {
   const address = useAddress()
   const navigate = useNavigate()
-  const [waku, setWaku] = useState(undefined);
-  const [wakuStatus, setWakuStatus] = useState("None");
-  const [selectedQuest, setSelectedQuest] = useState();
+  const [waku, setWaku] = useState(undefined)
+  const [wakuStatus, setWakuStatus] = useState("None")
+  const [selectedQuest, setSelectedQuest] = useState()
   const [quests, setQuests] = useState([
     {
-        "questName": "Quest For  GLASSES-DEEP-TEAL",
-        "questHint": "Decentralized creativity meets ancient charm at the crossroads of East and West.",
-        "questHash": "20656012635723524036702328630164289424646510225511108340787835813842513795043",
-        "questSalt": "s2xuu892",
-        "questAtrName": "glasses-deep-teal",
-        "questAtrType": "glasses",
-        "questAtrImg": "glasses-deep-teal.png"
+      questName: "Quest For  GLASSES-DEEP-TEAL",
+      questHint:
+        "Decentralized creativity meets ancient charm at the crossroads of East and West.",
+      questHash:
+        "20656012635723524036702328630164289424646510225511108340787835813842513795043",
+      questSalt: "s2xuu892",
+      questAtrName: "glasses-deep-teal",
+      questAtrType: "glasses",
+      questAtrImg: "glasses-deep-teal.png",
     },
     {
-        "questName": "Quest For  BG-COOL",
-        "questHint": "Unleash your coding magic where continents collide.",
-        "questHash": "14228942699358288528220922604750485781308244864246343118051809833184561724003",
-        "questSalt": "482wdp8n",
-        "questAtrName": "bg-cool",
-        "questAtrType": "bg",
-        "questAtrImg": "bg-cool.png"
+      questName: "Quest For  BG-COOL",
+      questHint: "Unleash your coding magic where continents collide.",
+      questHash:
+        "14228942699358288528220922604750485781308244864246343118051809833184561724003",
+      questSalt: "482wdp8n",
+      questAtrName: "bg-cool",
+      questAtrType: "bg",
+      questAtrImg: "bg-cool.png",
     },
     {
-        "questName": "Quest For  ACCESSORY-BLING-ANVIL",
-        "questHint": "Hack the Bosphorus breeze with your blockchain brilliance.",
-        "questHash": "21726448918513788856913228406302511217324886587952113075363295608571349320776",
-        "questSalt": "834b58y6",
-        "questAtrName": "accessory-bling-anvil",
-        "questAtrType": "accessory",
-        "questAtrImg": "accessory-bling-anvil.png"
+      questName: "Quest For  ACCESSORY-BLING-ANVIL",
+      questHint: "Hack the Bosphorus breeze with your blockchain brilliance.",
+      questHash:
+        "21726448918513788856913228406302511217324886587952113075363295608571349320776",
+      questSalt: "834b58y6",
+      questAtrName: "accessory-bling-anvil",
+      questAtrType: "accessory",
+      questAtrImg: "accessory-bling-anvil.png",
     },
     {
-        "questName": "Quest For  BODY-PEACHY-B",
-        "questHint": "Innovate where history and technology intertwine.",
-        "questHash": "8614960715691933623580508869231933685522103729909663513292523830737760087415",
-        "questSalt": "dkn6evpn",
-        "questAtrName": "body-peachy-B",
-        "questAtrType": "body",
-        "questAtrImg": "body-peachy-B.png"
+      questName: "Quest For  BODY-PEACHY-B",
+      questHint: "Innovate where history and technology intertwine.",
+      questHash:
+        "8614960715691933623580508869231933685522103729909663513292523830737760087415",
+      questSalt: "dkn6evpn",
+      questAtrName: "body-peachy-B",
+      questAtrType: "body",
+      questAtrImg: "body-peachy-B.png",
     },
     {
-        "questName": "Quest For  HEAD-BELUGA.PNG",
-        "questHint": "Elevate your code amidst the echoes of Byzantine brilliance.",
-        "questHash": "13178095318700154901199369371168412414205596719531432013364934552841283516671",
-        "questSalt": "knt94pu4",
-        "questAtrName": "head-beluga.png",
-        "questAtrType": "head",
-        "questAtrImg": "head-beluga.png"
-    }
-]);
+      questName: "Quest For  HEAD-BELUGA.PNG",
+      questHint: "Elevate your code amidst the echoes of Byzantine brilliance.",
+      questHash:
+        "13178095318700154901199369371168412414205596719531432013364934552841283516671",
+      questSalt: "knt94pu4",
+      questAtrName: "head-beluga.png",
+      questAtrType: "head",
+      questAtrImg: "head-beluga.png",
+    },
+  ])
 
-
-
-  useEffect(() => {
-    if (!address) {
-      navigate("/auth")
-    }
-  })
+  // useEffect(() => {
+  //   if (!address) {
+  //     navigate("/auth")
+  //   }
+  // })
 
   useEffect(() => {
     if (wakuStatus !== "None") return
@@ -160,7 +162,7 @@ export const HomeScreen = () => {
           )
 
           console.log({ messages })
-          setQuests([...messages]);
+          setQuests([...messages])
         }
       } catch (e) {
         console.log("Failed to retrieve messages", e)
@@ -174,7 +176,7 @@ export const HomeScreen = () => {
   let objModel = useRef()
   const [location, setLocation] = useState({
     latitude: 41.0477,
-    longitude:  28.987,
+    longitude: 28.987,
   })
   const [isModalOpen, setIsModalOpen] = useState(false)
   const mapContainerRef = useRef(null)
@@ -187,7 +189,7 @@ export const HomeScreen = () => {
       container: "map",
       style: "mapbox://styles/sajjad21990/clp3ucwk400ha01qu3edkbilp",
       center: [0, 0],
-      zoom: 17.6,
+      zoom: 18.6,
       pitch: 64.9,
       bearing: 0,
       antialias: true,
@@ -229,7 +231,7 @@ export const HomeScreen = () => {
           type: "custom",
           renderingMode: "3d",
           onAdd: async function () {
-            const scale = 0.06;
+            const scale = 14
             const options = {
               obj: "/public/scene.gltf",
               type: "gltf",
@@ -240,16 +242,15 @@ export const HomeScreen = () => {
 
             tb.loadObj(options, (model) => {
               // alert(`added  ${latitude}, ${longitude}`)
-              objModel.current = model;
-              model.setCoords([longitude, latitude]);
-              model.setRotation({ x: 0, y: 0, z: 241 });
-              tb.add(model);
-            });
+              objModel.current = model
+              model.setCoords([longitude, latitude])
+              model.setRotation({ x: 0, y: 0, z: 241 })
+              tb.add(model)
+            })
           },
 
           render: function () {
-            tb.update();
-
+            tb.update()
           },
         })
       }
@@ -259,14 +260,12 @@ export const HomeScreen = () => {
       console.error("Error getting location:", error)
     }
 
-
     map.current.on("style.load", () => {
       navigator.geolocation.watchPosition(
         handleGeolocationSuccess,
         handleGeolocationError
-      );
-      
-    });
+      )
+    })
 
     return () => {
       window.removeEventListener("deviceorientation", handleDeviceMotion)
@@ -323,7 +322,6 @@ export const HomeScreen = () => {
   }
 
   const handleOpenModal = () => {
-    
     setIsModalOpen(!isModalOpen)
   }
 
@@ -339,9 +337,9 @@ export const HomeScreen = () => {
           <h2 className='cursor-pointer' onClick={() => navigate("/profile")}>
             Profile
           </h2>
-          <Button className='btn' onClick={handleOpenModal}>
+          <button className='btn' onClick={handleOpenModal}>
             Show Quests
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -349,7 +347,11 @@ export const HomeScreen = () => {
         <ModalOverlay />
         <ModalContent>
           {/* pass the value */}
-          <Quests quests={quests}  setSelectedQuest={setSelectedQuest} handleCloseModal={handleCloseModal}/>
+          <Quests
+            quests={quests}
+            setSelectedQuest={setSelectedQuest}
+            handleCloseModal={handleCloseModal}
+          />
           <ModalFooter>
             <Button
               width={"100%"}
@@ -365,35 +367,11 @@ export const HomeScreen = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Button
-              width={"100%"}
-              style={{
-                fontFamily: "Londrina Solid",
-                backgroundColor: "#0d6efd",
-                color: "#fff",
-                zIndex: '999'
-              }}
-              onClick={ async () => {
-                const snarkjs = window.snarkjs;
-                const geohash = Geohash.encode(location.latitude,location.longitude,6)
-                // console.log({geohash})
-                const salt = selectedQuest.questSalt
-                const geohashExt = geohash + salt
-                const geoHashExtIntArray = geohashExt.split('')
-                const saltCharArray = salterStrig.split('')
-                const geoHashExtIntArrayEncoded = geoHashExtIntArray.map(e => saltCharArray.indexOf(e))
-          // console.log({ "in": geoHashExtIntArrayEncoded,  "hash": selectedQuest.questHash })
-                const {proof, publicSignals} = await snarkjs.groth16.fullProve({ "in": geoHashExtIntArrayEncoded,  "hash": selectedQuest.questHash }, "circuit.wasm", "circuit_0000.zkey")
-                alert( publicSignals )
-               
-              }}
-            >
-              Gen Proof
-            </Button>
+
       <div
         ref={mapContainerRef}
         id='map'
-        style={{ width: "100%", height: "100vh" }}
+        style={{ width: "100%", height: "90vh" }}
       >
         <div
           style={{
@@ -405,10 +383,9 @@ export const HomeScreen = () => {
             zIndex: 1,
           }}
         >
-          <QuestCard />
+          {selectedQuest && <QuestCard quest={selectedQuest} />}
         </div>
         <div>
-          
           {mapboxgl && (
             <ReactMapGl
               width='100%'
@@ -419,25 +396,57 @@ export const HomeScreen = () => {
               mapboxApiAccessToken={mapboxgl.accessToken}
               mapStyle='mapbox://styles/mapbox/navigation-night-v1'
             />
-             
-            
           )}
         </div>
 
         <div
           style={{
             position: "absolute",
-
+            top: "84%",
+            left: "20px",
+            width: "90%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            bottom: "70%",
-            right: "2%",
-            zIndex: 1,
-            padding: "20px",
           }}
         >
-          <MSquare />
+          <Button
+            width={"100%"}
+            style={{
+              fontFamily: "Londrina Solid",
+              backgroundColor: "#0d6efd",
+              color: "#fff",
+              zIndex: "999",
+            }}
+            onClick={async () => {
+              const snarkjs = window.snarkjs
+              const geohash = Geohash.encode(
+                location.latitude,
+                location.longitude,
+                6
+              )
+              // console.log({geohash})
+              const salt = selectedQuest.questSalt
+              const geohashExt = geohash + salt
+              const geoHashExtIntArray = geohashExt.split("")
+              const saltCharArray = salterStrig.split("")
+              const geoHashExtIntArrayEncoded = geoHashExtIntArray.map((e) =>
+                saltCharArray.indexOf(e)
+              )
+              // console.log({ "in": geoHashExtIntArrayEncoded,  "hash": selectedQuest.questHash })
+              const { proof, publicSignals } = await snarkjs.groth16.fullProve(
+                {
+                  in: geoHashExtIntArrayEncoded,
+                  hash: selectedQuest.questHash,
+                },
+                "circuit.wasm",
+                "circuit_0000.zkey"
+              )
+              alert(publicSignals)
+            }}
+          >
+            Gen Proof
+          </Button>
         </div>
 
         <div
@@ -452,9 +461,34 @@ export const HomeScreen = () => {
             padding: "20px",
           }}
         >
-          <button className='btn' style={{ width: "60%" }}>
-            PICK UP
-          </button>
+          <div
+            style={{
+              position: "absolute",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              bottom: "-50%",
+              gap: 20,
+              zIndex: 1,
+              padding: "20px",
+            }}
+          >
+            <button
+              onClick={() => getPermissions()}
+              className='btn'
+              style={{ width: "60%", background: "#9CB4B8" }}
+            >
+              Grant Permissions
+            </button>
+            <button
+              className='btn'
+              style={{ width: "60%" }}
+              onClick={() => navigate("/profile")}
+            >
+              Profile
+            </button>
+          </div>
         </div>
       </div>
     </HomeContainer>
@@ -462,21 +496,34 @@ export const HomeScreen = () => {
 }
 
 function decodeMessage(wakuMessage) {
-  if (!wakuMessage.payload) return;
+  if (!wakuMessage.payload) return
 
-  const { questName,questHint,questHash,questSalt,questAtrName,questAtrType,questAtrImg ,timestamp} = ProtoQuestData.decode(
-    wakuMessage.payload
-  );
+  const {
+    questName,
+    questHint,
+    questHash,
+    questSalt,
+    questAtrName,
+    questAtrType,
+    questAtrImg,
+    timestamp,
+  } = ProtoQuestData.decode(wakuMessage.payload)
 
   // if (!timestamp || !questHint || !questName) return;
 
-  const time = new Date();
-  time.setTime(Number(timestamp));
+  const time = new Date()
+  time.setTime(Number(timestamp))
 
   // const utf8Text = bytesToUtf8(text);
 
   return {
-    questName,questHint,questHash,questSalt,questAtrName,questAtrType,questAtrImg,
+    questName,
+    questHint,
+    questHash,
+    questSalt,
+    questAtrName,
+    questAtrType,
+    questAtrImg,
     timestampInt: wakuMessage.timestamp,
   }
 }

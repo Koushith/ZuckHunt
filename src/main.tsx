@@ -51,7 +51,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           autoConnect={false}
           // authConfig={{
           //   authUrl: "/auth",
-          //   domain: "http://localhost:5173",
+          //   domain: "https://5ace-212-175-155-170.ngrok-free.app",
           // }}
           activeChain={activeChain}
           clientId={thirdWebClientId}

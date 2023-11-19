@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
+/* height:50vh; */
  font-family: 'Londrina Solid', 'sans-serif';
  .header{
   position: relative;
