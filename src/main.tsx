@@ -19,6 +19,7 @@ import {
   localWallet,
   embeddedWallet,
 } from "@thirdweb-dev/react"
+import { AuthProvider } from "./context/auth.context.tsx"
 
 // 1. Get projectId
 const projectId = "62c53a482fac82778f1af659aa461672"
@@ -48,10 +49,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ChakraProvider>
         <ThirdwebProvider
           autoConnect={false}
-          authConfig={{
-            authUrl: "/auth",
-            domain: "http://localhost:5173",
-          }}
+          // authConfig={{
+          //   authUrl: "/auth",
+          //   domain: "http://localhost:5173",
+          // }}
           activeChain={activeChain}
           clientId={thirdWebClientId}
           supportedWallets={[
@@ -68,7 +69,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           ]}
         >
           <WagmiConfig config={wagmiConfig}>
-            <RouterProvider router={routerConfig} />
+            <>
+              <RouterProvider router={routerConfig} />
+            </>
           </WagmiConfig>
         </ThirdwebProvider>
       </ChakraProvider>

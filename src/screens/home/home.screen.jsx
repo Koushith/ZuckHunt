@@ -36,11 +36,21 @@ import {
 import { QuestCard } from "../../components/card/card.component"
 import { BoxIcon, MSquare } from "lucide-react"
 import { HamburgerMenuIcon, IconJarLogoIcon } from "@radix-ui/react-icons"
+import { useAddress } from "@thirdweb-dev/react"
+import { useNavigate } from "react-router-dom"
 
 export const HomeScreen = () => {
   const [waku, setWaku] = useState(undefined)
   const [wakuStatus, setWakuStatus] = useState("None")
   const [quests, setQuests] = useState([])
+  const address = useAddress()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!address) {
+      navigate("/auth")
+    }
+  })
 
   useEffect(() => {
     if (wakuStatus !== "None") return
@@ -274,20 +284,10 @@ export const HomeScreen = () => {
     <HomeContainer>
       <div className='header'>
         <h1>Zuck Hunt</h1>
-        <div className='flex gap-4 p-'>
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger asChild className='ml-2'>
-              <Button variant='outline' size='icon'>
-                <HamburgerMenuIcon className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-                <IconJarLogoIcon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-                <span className='sr-only'>Toggle theme</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              <DropdownMenuItem onClick={() => ""}>Dark</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => ""}>Light</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
+        <div className='flex gap-4 items-center menu'>
+          <h2 className='cursor-pointer' onClick={() => navigate("/profile")}>
+            Profile
+          </h2>
           <Button className='btn' onClick={handleOpenModal}>
             Show Quests
           </Button>
@@ -321,6 +321,7 @@ export const HomeScreen = () => {
       >
         <div
           style={{
+            fontFamily: `Londrina Solid", "sans-serif`,
             position: "absolute",
             top: "78px",
             left: "6px",

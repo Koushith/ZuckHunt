@@ -8,34 +8,55 @@ import {
 } from "@/components/ui/card"
 import { ChromeIcon } from "lucide-react"
 import { TopBar } from "../../components/common/topbar.component"
-import { ConnectWallet } from "@thirdweb-dev/react"
+import { ConnectWallet, useAddress } from "@thirdweb-dev/react"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
 
 export const AuthScreen = () => {
-  return (
-    <>
-      <TopBar />
-      <div className='flex items-center justify-center mt-10 h-screen'>
-        <div className='w-full max-w-sm'>
-          <Card className='bg-background'>
-            <CardHeader className='space-y-1'>
-              <CardTitle className='text-2xl'>Sign in to ZuckHunt</CardTitle>
-            </CardHeader>
-            <CardContent className='grid gap-4'>
-              {/* Removed email input section */}
-              <div className='relative'>
-                <div className='absolute inset-0 flex items-center'>
-                  <span className='w-full border-t' />
-                </div>
-                <div className='relative flex justify-center text-xs uppercase'>
-                  {/* Commented out the Or continue with text */}
-                </div>
-              </div>
+  const address = useAddress()
+  const navigate = useNavigate()
+  console.log("address", address)
 
-              <ConnectWallet />
-            </CardContent>
-          </Card>
+  useEffect(() => {
+    if (address) {
+      navigate("/")
+    }
+  }, [address])
+  return (
+    <AuthContainer>
+      <TopBar />
+      <div className='form'>
+        <img src='https://nouns.wtf/static/media/noggles.7644bfd0.svg' />
+        <div className='action'>
+          <h1>Sign in to ZuckHunt</h1>
+          <ConnectWallet />
         </div>
       </div>
-    </>
+    </AuthContainer>
   )
 }
+
+const AuthContainer = styled.div`
+  font-family: "Londrina Solid", "sans-serif";
+
+  .form {
+    margin-top: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .action {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h1 {
+        margin-bottom: 20px;
+      }
+    }
+  }
+`

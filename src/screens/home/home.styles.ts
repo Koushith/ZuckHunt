@@ -16,7 +16,10 @@ export const HomeContainer = styled.div`
 }
 h1{
  font-size:20px;
- 
+}
+
+.menu{
+  color:#fff;
 }
 
 .btn{

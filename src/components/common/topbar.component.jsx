@@ -26,51 +26,42 @@ export const TopBar = () => {
   const { setTheme } = useTheme()
   const navigate = useNavigate()
 
-  const isAdmin = true
-  const isAuthendicated = true
   return (
     <div
-      className='border-b '
-      style={{ fontFamily: `Londrina Solid", "sans-serif` }}
+      style={{
+        fontFamily: `Londrina Solid", "sans-serif`,
+        background: "#2B83F6",
+        color: "#F3322C",
+      }}
     >
       <div
         className='flex items-center justify-between p-4 mt-0 mb-0 ml-auto mr-auto '
         style={{ maxWidth: "1600px", height: "80px" }}
       >
-        <h1 className='cursor-pointer' onClick={() => navigate("/")}>
-          ZuckHunt 📄
+        <h1
+          className='cursor-pointer'
+          style={{ fontSize: "20px" }}
+          onClick={() => navigate("/")}
+        >
+          ZuckHunt
         </h1>
-        <div className='flex'>
-          <div className='hidden md:block'>
-            {" "}
-            {/* Hide on mobile */}
-            {isAuthendicated ? (
-              <Button
-                className='bg-red-500 hover:bg-red-600'
-                // onClick={logoutHandler}
-              >
-                Logout
-              </Button>
-            ) : (
-              <Button
-                className='bg-green-500 hover:bg-green-600'
-                //  onClick={loginHandler}
-              >
-                Sign up
-              </Button>
-            )}
-          </div>
+        <div className='flex text-white'>
           <div className='mr-2'>
-            <p className='cursor-pointer' onClick={() => navigate("/admin")}>
-              Add Quest
+            <p
+              className='cursor-pointe'
+              style={{ color: "#fff" }}
+              onClick={() => navigate("/profile")}
+            >
+              Profile
             </p>
           </div>
-          <div className='pl-4'>
+          <div className='mr-2'>
             <p
-              className='cursor-ponter'
-              onClick={() => navigate("/view-quests")}
+              className='cursor-pointe'
+              style={{ color: "#fff" }}
+              onClick={() => navigate("/admin")}
             >
-              All Quests
+              Add Quest
             </p>
           </div>
         </div>

@@ -18,6 +18,7 @@ export const QuestCard = (props) => {
 }
 
 const CardContainer = styled.div`
+  font-family: "Londrina Solid";
   gap: 10px;
   margin-bottom: 15px;
   max-width: 600px;
